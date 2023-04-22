@@ -1,11 +1,11 @@
 fn main() {
     println!("Enter your weight");
-    let weight = read_f64();
+    let weight = Weight(read_f64());
 
     println!("Enter your height");
-    let height = read_f64();
+    let height = Height(read_f64());
 
-    let (bmi, score) = calculate_bmi(Height(height), Weight(weight));
+    let (bmi, score) = calculate_bmi(height, weight);
     println!("Your BMI is: {bmi}");
     match score {
         Score::UnderWeight => println!("You are underweight"),
