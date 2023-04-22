@@ -46,9 +46,9 @@ enum Score {
 fn calculate_bmi(height: Height, weight: Weight) -> (f64, Score) {
     let bmi = weight.0 / (height.0 * height.0);
     let score = match bmi {
-        0.0..=18.4 => Score::Under,
-        18.4..=24.9 => Score::Normal,
-        24.9..=f64::MAX => Score::Over,
+        x if x < 18.4 => Score::Under,
+        x if x < 24.9 => Score::Normal,
+        x if x < f64::MAX => Score::Over,
         _ => panic!("invalid bmi"),
     };
     (bmi, score)
