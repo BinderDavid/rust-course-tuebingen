@@ -8,9 +8,9 @@ fn main() {
     let (bmi, score) = calculate_bmi(height, weight);
     println!("Your BMI is: {bmi}");
     match score {
-        Score::UnderWeight => println!("You are underweight"),
-        Score::NormalWeight => println!("Your weight is in the normal range"),
-        Score::OverWeight => println!("You are overweight"),
+        Score::Under => println!("You are underweight"),
+        Score::Normal => println!("Your weight is in the normal range"),
+        Score::Over => println!("You are overweight"),
     }
 }
 
@@ -38,18 +38,17 @@ struct Weight(f64);
 
 #[derive(PartialEq, Debug)]
 enum Score {
-    UnderWeight,
-    NormalWeight,
-    OverWeight,
+    Under,
+    Normal,
+    Over,
 }
 
-/// Calculate the BMI
 fn calculate_bmi(height: Height, weight: Weight) -> (f64, Score) {
     let bmi = weight.0 / (height.0 * height.0);
     let score = match bmi {
-        0.0..=18.4 => Score::UnderWeight,
-        18.4..=24.9 => Score::NormalWeight,
-        24.9..=f64::MAX => Score::OverWeight,
+        0.0..=18.4 => Score::Under,
+        18.4..=24.9 => Score::Normal,
+        24.9..=f64::MAX => Score::Over,
         _ => panic!("invalid bmi"),
     };
     (bmi, score)
@@ -62,7 +61,7 @@ mod tests {
     fn calculate_bmi_1() {
         assert_eq!(
             crate::calculate_bmi(crate::Height(2.0), crate::Weight(100.0)),
-            (25.0, crate::Score::OverWeight)
+            (25.0, crate::Score::Over)
         )
     }
 }
